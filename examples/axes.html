@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fluid Gamepad Orchestra : Axes</title>
+
+        <script src="../node_modules/infusion/dist/infusion-all.js"></script>
+        <script src="../node_modules/bergson/dist/bergson-only.js"></script>
+
+        <script src="../src/js/axis.js"></script>
+        <script src="../src/js/button.js"></script>
+        <script src="../src/js/gamepad.js"></script>
+        <script src="../src/js/gamepads.js"></script>
+        <script src="../src/js/orchestra.js"></script>
+        <script src="../src/js/stringTemplateRenderingView.js"></script>
+
+        <script src="js/axes.js"></script>
+
+        <link rel="stylesheet" href="../src/css/orchestra.css"/>
+    </head>
+    <body>
+        <h2>Fluid Gamepad - "Axes"</h2>
+
+        <p>
+            The first and second axes (typically the left thumbstick) control 'weak' (higher pitched) vibration.  The
+            third and fourth axes (typically the right thumbstick) control 'strong' (lower pitched) vibration.
+        </p>
+
+        <div class="orchestra-container"></div>
+
+        <script>
+            var component = fluid.gamepad.orchestra.examples.axes(".orchestra-container");
+        </script>
+    </body>
+</html>

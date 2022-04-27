@@ -1,0 +1,20 @@
+{
+  "name": "fluid-gamepad-orchestra",
+  "version": "0.1.0",
+  "description": "Create an in-browser \"orchestra\" of gamepad controllers.",
+  "main": "examples/baseline.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tony Atkins <duhrer@gmail.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "bergson": "0.14.1",
+    "infusion": "4.0.0"
+  },
+  "devDependencies": {
+    "mkdirp": "1.0.4",
+    "recursive-copy": "2.0.14",
+    "rimraf": "3.0.2"
+  }
+}

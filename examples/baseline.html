@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fluid Gamepad Orchestra : Baseline</title>
+
+        <script src="../node_modules/infusion/dist/infusion-all.js"></script>
+        <script src="../node_modules/bergson/dist/bergson-only.js"></script>
+
+        <script src="../src/js/axis.js"></script>
+        <script src="../src/js/button.js"></script>
+        <script src="../src/js/gamepad.js"></script>
+        <script src="../src/js/gamepads.js"></script>
+        <script src="../src/js/orchestra.js"></script>
+        <script src="../src/js/stringTemplateRenderingView.js"></script>
+
+        <link rel="stylesheet" href="../src/css/orchestra.css"/>
+    </head>
+    <body>
+        <h2>Fluid Gamepad - Baseline Functionality</h2>
+
+        <p>
+            The gamepad orchestra makes a component tree for each connected controller.  This page demonstrates basic
+            functionality.
+        </p>
+
+        <div class="orchestra-container"></div>
+
+        <script>
+            var component = fluid.gamepad.orchestra.onscreen(".orchestra-container");
+        </script>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+.gamepad-sequencer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+}
+
+.gamepad-sequencer-steps {
+    column-gap: 0.3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 0.3rem;
+    width: 10rem;
+}
+
+.fluid-gamepad-sequence-step {
+    border: 0.1rem solid #999;
+    border-radius: 3px;
+    width: 1rem;
+    height: 1rem;
+}
+
+.fluid-gamepad-sequence-step--hasVibration {
+    background-color: #6666ff;
+}
+
+.fluid-gamepad-sequence-step--isActiveStep {
+    background-color: #ff6666;
+}
+
+.fluid-gamepad-sequence-step--hasVibration.fluid-gamepad-sequence-step--isActiveStep {
+    background-color: #ff66ff;
+}
+
+.fluid-gamepad-sequence-step--isFocused {
+    /* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit; */
+    box-shadow: 0 0 0 2px #ffffff;
+}
+
+.gamepad-sequencer-bpm-container {
+    align-items: center;
+    border: 1px solid #999999;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    width: 5rem;
+}
+
+.gamepad-sequencer-bpm {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: auto;
+}

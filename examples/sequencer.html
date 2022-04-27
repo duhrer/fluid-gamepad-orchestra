@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fluid Gamepad Orchestra : Sequencer</title>
+
+        <script src="../node_modules/infusion/dist/infusion-all.js"></script>
+        <script src="../node_modules/bergson/dist/bergson-only.js"></script>
+
+        <script src="../src/js/axis.js"></script>
+        <script src="../src/js/button.js"></script>
+        <script src="../src/js/gamepad.js"></script>
+        <script src="../src/js/gamepads.js"></script>
+        <script src="../src/js/orchestra.js"></script>
+        <script src="../src/js/stringTemplateRenderingView.js"></script>
+
+        <script src="./js/sequencer.js"></script>
+
+        <link rel="stylesheet" href="../src/css/orchestra.css"/>
+        <link rel="stylesheet" href="./css/sequencer.css"/>
+    </head>
+    <body>
+        <h2>Fluid Gamepad - "Sequencer"</h2>
+
+        <p>
+            Each gamepad controls its own sequence of pulses (vibrations).
+        </p>
+
+        <div class="orchestra-container"></div>
+
+        <h5>Controls</h5>
+
+        <p>
+            Press any button on your controller to make it show up here (it's a requirement of the Gamepad API). Once
+            your controller shows up, you can:
+        </p>
+
+        <ol>
+            <li>
+                Use the d-pad to navigate the grid (sequence).
+            </li>
+
+            <li>Press Button 0 (X on a Playstation controller) to set the strong and weak vibration value for the focused step to 100%.</li>
+
+            <li>Button 1 (circle on a Playstation controller) sets the strong and weak vibration value for the focused step to 0.</li>
+
+            <li>Button 2 (square on a Playstation controller) sets the strong vibration for the focused step to 100% and the weak to 0%.</li>
+
+            <li>Button 3 (triangle on a Playstation controller) sets the strong vibration for the focused step to 0% and the weak to 100%.</li>
+
+            <li>Press down on either of the thumb sticks to stop/start the sequencer.</li>
+
+            <li>Use the bumpers to control the BPM.</li>
+        </ol>
+
+        <script>
+            var component = fluid.gamepad.orchestra.examples.sequencer(".orchestra-container");
+        </script>
+    </body>
+</html>

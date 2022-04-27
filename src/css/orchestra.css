@@ -1,0 +1,84 @@
+.gamepad {
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.gamepad-buttons-and-axes {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+    align-items: center;
+    width: 20rem;
+}
+
+.gamepad-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 20rem;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+}
+
+.gamepad-button {
+    border: 2px solid #999;
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.gamepad-button--pressed {
+    background-color: #66f;
+}
+
+.gamepad-axes {
+    column-gap: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    width: 10rem;
+}
+
+.gamepad-axis-value-bar {
+    border: 2px solid #999;
+    border-radius: 1rem;
+    height: 15rem;
+    margin-top: 50%;
+    width: 2rem;
+}
+
+.gamepad-axis-value-bar-position-indicator {
+    margin-left: -0.625rem;
+    margin-top: 6rem;
+    border: 2px solid #666;
+    border-radius: 1.5rem;
+    height: 3rem;
+    width: 3rem;
+}
+
+.gamepad-axis-value {
+    margin-top: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    .gamepad-axis-value-bar-position-indicator {
+        background-color: #000;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: white;
+        color: black;
+    }
+
+    .gamepad-axis-value-bar-position-indicator {
+        background-color: #fff;
+    }
+}

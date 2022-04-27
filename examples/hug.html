@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fluid Gamepad Orchestra : Hug</title>
+
+        <script src="../node_modules/infusion/dist/infusion-all.js"></script>
+        <script src="../node_modules/bergson/dist/bergson-only.js"></script>
+
+        <script src="../src/js/axis.js"></script>
+        <script src="../src/js/button.js"></script>
+        <script src="../src/js/gamepad.js"></script>
+        <script src="../src/js/gamepads.js"></script>
+        <script src="../src/js/orchestra.js"></script>
+        <script src="../src/js/stringTemplateRenderingView.js"></script>
+
+        <script src="./js/hug.js"></script>
+
+        <link rel="stylesheet" href="../src/css/orchestra.css"/>
+    </head>
+    <body>
+        <h2>Fluid Gamepad - "Hug"</h2>
+
+        <p>
+            Give your controller a hug, the more buttons you smoosh, the more the controller vibrates.
+        </p>
+
+        <div class="orchestra-container"></div>
+
+        <script>
+            var component = fluid.gamepad.orchestra.examples.hug(".orchestra-container");
+        </script>
+    </body>
+</html>
