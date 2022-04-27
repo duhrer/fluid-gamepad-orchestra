@@ -7,9 +7,9 @@
 .gamepad-sequencer-steps {
     column-gap: 0.3rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     row-gap: 0.3rem;
-    width: 10rem;
+    width: 13rem;
 }
 
 .fluid-gamepad-sequence-step {

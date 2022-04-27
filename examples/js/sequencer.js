@@ -8,7 +8,8 @@
         },
         model: {
             activeStep: -1,
-            col: 0,
+            col: "@expand:parseInt({that}.options.col)", // Obviously problematic, but required if we want to set col using a dynamic component.
+            // col: 0,
             focusedStep: 0,
             vibration : {
                 weak: 0,
@@ -67,13 +68,38 @@
         members: {
             currentBpm: 90
         },
+        // dynamic component sources apparently can't be arrays if you expect to access {sourcePath} in the way we need.
+        // sequenceDefs: [
+        //     true, true, true, true, true, true, true, true,
+        //     true, true, true, true, true, true, true, true,
+        //     true, true, true, true, true, true, true, true,
+        //     true, true, true, true, true, true, true, true,
+        //     true, true, true, true, true, true, true, true,
+        //     true, true, true, true, true, true, true, true
+        // ],
+        // Thankfully, the same as a map works well enough.
+        sequenceDefs: {
+             0: true,  1: true,  2: true,  3: true,  4: true,  5: true,  6: true,  7: true,
+             8: true,  9: true, 10: true, 11: true, 12: true, 13: true, 14: true, 15: true,
+            16: true, 17: true, 18: true, 19: true, 20: true, 21: true, 22: true, 23: true,
+            24: true, 25: true, 26: true, 27: true, 28: true, 29: true, 30: true, 31: true,
+            32: true, 33: true, 34: true, 35: true, 36: true, 37: true, 38: true, 39: true,
+            40: true, 41: true, 42: true, 43: true, 44: true, 45: true, 46: true, 47: true
+        },
         model: {
             bpm: 90,
             running: false,
             activeStep: 0,
             focusedStep: 0,
-            // 24 empty steps
-            sequence: [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} ]
+            // 48 empty steps, each of which will be paired with its own component.
+            sequence: [
+                {}, {}, {}, {}, {}, {}, {}, {},
+                {}, {}, {}, {}, {}, {}, {}, {},
+                {}, {}, {}, {}, {}, {}, {}, {},
+                {}, {}, {}, {}, {}, {}, {}, {},
+                {}, {}, {}, {}, {}, {}, {}, {},
+                {}, {}, {}, {}, {}, {}, {}, {}
+            ]
         },
         modelListeners: {
             "bpm": {
@@ -108,12 +134,12 @@
             // up: 12
             "gamepad.buttons.12.pressed": {
                 funcName: "fluid.gamepad.orchestra.examples.sequencer.gamepad.updateFocusedStep",
-                args: ["{that}", -6, "{change}.value"]
+                args: ["{that}", -8, "{change}.value"]
             },
             // down: 13
             "gamepad.buttons.13.pressed": {
                 funcName: "fluid.gamepad.orchestra.examples.sequencer.gamepad.updateFocusedStep",
-                args: ["{that}", 6, "{change}.value"]
+                args: ["{that}", 8, "{change}.value"]
             },
             // left: 14
             "gamepad.buttons.14.pressed": {
@@ -176,297 +202,33 @@
 
             // TODO: Model listener to update step weak/strong vibration based on left (6) and right (7) triggers.
         },
-        components: {
-            // TODO: Try accomplishing this with dynamic components and sources.
-            step0: {
+        dynamicComponents: {
+            step: {
                 type: "fluid.gamepad.orchestra.examples.sequencer.step",
                 container: "{that}.dom.steps",
+                sources: "{that}.options.sequenceDefs",
                 options: {
-                    model: {
-                        col: 0,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.0"
-                    }
-                }
-            },
-            step1: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 1,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.1"
-                    }
-                }
-            },
-            step2: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 2,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.2"
-                    }
-                }
-            },
-            step3: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 3,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.3"
-                    }
-                }
-            },
-            step4: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 4,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.4"
-                    }
-                }
-            },
-            step5: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 5,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.5"
-                    }
-                }
-            },
-            step6: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 6,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.6"
-                    }
-                }
-            },
-            step7: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 7,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.7"
-                    }
-                }
-            },
-            step8: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 8,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.8"
-                    }
-                }
-            },
-            step9: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 9,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.9"
-                    }
-                }
-            },
-            step10: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 10,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.10"
-                    }
-                }
-            },
-            step11: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 11,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.11"
-                    }
-                }
-            },
-            step12: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 12,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.12"
-                    }
-                }
-            },
-            step13: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 13,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.13"
-                    }
-                }
-            },
-            step14: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 14,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.14"
-                    }
-                }
-            },
-            step15: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 15,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.15"
-                    }
-                }
-            },
-            step16: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 16,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.16"
-                    }
-                }
-            },
-            step17: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 17,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.17"
-                    }
-                }
-            },
-            step18: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 18,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.18"
-                    }
-                }
-            },
-            step19: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 19,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.19"
-                    }
-                }
-            },
-            step20: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 20,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.20"
-                    }
-                }
-            },
-            step21: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 21,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.21"
-                    }
-                }
-            },
-            step22: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 22,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.22"
-                    }
-                }
-            },
-            step23: {
-                type: "fluid.gamepad.orchestra.examples.sequencer.step",
-                container: "{that}.dom.steps",
-                options: {
-                    model: {
-                        col: 23,
-                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
-                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep",
-                        vibration: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.sequence.23"
-                    }
-                }
-            },
+                    col: "{sourcePath}", // Works, and is fine since we don't need it to actually relay.
 
+                    modelRelay: [
+                        {
+                            source: {
+                                context: "gamepad",
+                                segs: ["sequence", "{sourcePath}"]
+                            },
+                            target: "vibration"
+                        }
+                    ],
+
+                    model: {
+                        // col: "{sourcePath}", // Fails.
+                        activeStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.activeStep",
+                        focusedStep: "{fluid.gamepad.orchestra.examples.sequencer.gamepad}.model.focusedStep"
+                    }
+                }
+            }
+        },
+        components: {
             scheduler: {
                 type: "berg.scheduler",
                 options: {
@@ -502,7 +264,7 @@
 
     fluid.gamepad.orchestra.examples.sequencer.gamepad.updateFocusedStep = function (that, increment, buttonValue) {
         if (buttonValue) {
-            var newFocusedStep = (that.model.focusedStep + increment) % 24;
+            var newFocusedStep = (that.model.focusedStep + increment) % 48;
             that.applier.change("focusedStep", newFocusedStep);
         }
     };
@@ -571,7 +333,7 @@
             fluid.gamepad.orchestra.examples.sequencer.gamepad.updateBpm(that);
         }
 
-        var nextActiveStep = (that.model.activeStep + 1) % 24;
+        var nextActiveStep = (that.model.activeStep + 1) % 48;
         that.applier.change("activeStep", nextActiveStep);
 
         // Play exactly until time for the next step, so that repeated vibrations of the same strength appear
